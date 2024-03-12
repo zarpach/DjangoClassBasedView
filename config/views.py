@@ -3,7 +3,7 @@ from django.views.generic import (ListView,
                                   DeleteView,
                                   DetailView,
                                   UpdateView,
-                                  CreateView)
+                                  CreateView,)
 from .models import Photo
 from .forms import PhotoCreationForm
 from django.urls import reverse_lazy
@@ -13,7 +13,6 @@ class PhotoListView(ListView):
     model = Photo
     template_name = 'list.html'
     context_object_name = 'photos'
-# create.html
 
 
 class PhotoCreateView(CreateView):
@@ -41,3 +40,11 @@ class PhotoDeleteView(DeleteView):
     template_name = 'delete.html'
     context_object_name = 'photo'
     success_url = reverse_lazy('photo:list')
+
+
+
+
+
+
+
+# django-admin startapp users
