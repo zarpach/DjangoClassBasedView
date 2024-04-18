@@ -8,3 +8,5 @@ class PhotoAdmin(admin.ModelAdmin):
     search_fields = ['name']
     list_filter = ['author', 'created_at']
 
+
+# filters.py

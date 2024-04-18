@@ -7,14 +7,28 @@ from django.views.generic import (ListView,
 from .models import Photo
 from .forms import PhotoCreationForm
 from django.urls import reverse_lazy
-
+from .filters import PhotoSearch
 
 
 class PhotoListView(ListView):
-    paginate_by = 2
+    paginate_by = 5
     model = Photo
     template_name = 'list.html'
     context_object_name = 'photos'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = PhotoSearch(
+            self.request.GET,
+            queryset=queryset
+        )
+
+        return self.filterset.qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['filter'] = self.filterset
+        return context
 
 
 class PhotoCreateView(CreateView):

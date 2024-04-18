@@ -2,10 +2,48 @@
 
 {% block body %}
 
+    <div class="p-5 container row">
 
-<div class="row">
+    <div class="col-auto">
+        <div class="col mb-2">
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+            Поиск
+        </button>
+    </div>
+
+
+<div class="col-auto" style="min-height: 0;">
+  <div class="collapse collapse-horizontal show" id="collapseWidthExample">
+    <div class="card card-body" style="width: 300px;">
+      <form method="get">
+          <div class="form-control m-2">
+              <label for="{{ filter.form.id_for_name }}">Name subject:</label>
+              {{ filter.form.name }}
+          </div>
+
+          <div class="form-control m-2">
+              <label for="{{ filter.form.id_for_name }}">Category:</label>
+              {{ filter.form.category }}
+          </div>
+
+          <div class="col form-control m-2">
+              <label for="{{ filter.form.id_for_name }}">Author:</label>
+              {{ filter.form.author }}
+          </div>
+        <button class="m-2 btn btn-outline-primary" type="submit">Найти</button>
+    </form>
+    </div>
+  </div>
+</div>
+    </div>
+
+
+
+
+
+<div class="row container-fluid">
   {% for photo in photos %}
-  <div class="card m-1 col-lg-2 col-md-4 col-xs-6">
+  <div class="card m-1 col-sm-3">
     <a href="{% url 'photo:detail' photo.id %}" class="d-block mb-4 h-100">
       <img src="{{ photo.image.url }}" class="rounded img-fluid" alt="{{ photo.title }}" />
         <p>{{ photo.name }}</p>
@@ -40,4 +78,7 @@
     {% endif %}
   </ul>
 </nav>
+    </div>
+
+
 {% endblock body %}
