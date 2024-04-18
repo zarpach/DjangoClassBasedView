@@ -7,28 +7,31 @@
       data-bs-target="#navbarTogglerDemo02"
       aria-controls="navbarTogglerDemo02"
       aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+      aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div
-      class="collapse navbar-collapse flex-row-reverse"
-      id="navbarTogglerDemo02"
-    >
+    <div class="collapse navbar-collapse flex-row-reverse" id="navbarTogglerDemo02">
       <ul class="navbar-nav">
         {% if user.is_authenticated %}
 
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Hi {{user.username}}</a>
+            </li>
 
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Hi {{user.username}}</a>
-        </li>
+            <form method="post" action="{% url 'user:logout' %}">
+            {% csrf_token %}
+                <li class="nav-item">
+                  <button class="btn btn-sm btn-info">Logout</button>
+                </li>
+            </form>
+
         {% else %}
 
-        <li class="nav-item">
-          <a href="{% url 'user:login' %}" class="btn btn-sm btn-danger"
-            >Sign In</a
-          >
-        </li>
+            <li class="nav-item">
+              <a href="{% url 'user:login' %}" class="btn btn-sm btn-danger"
+                >Sign In</a>
+            </li>
+
         {% endif %}
       </ul>
     </div>

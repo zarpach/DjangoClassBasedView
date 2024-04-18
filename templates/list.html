@@ -2,17 +2,42 @@
 
 {% block body %}
 
+
 <div class="row">
   {% for photo in photos %}
-  <div class="col-lg-3 col-md-4 col-xs-6">
+  <div class="card m-1 col-lg-2 col-md-4 col-xs-6">
     <a href="{% url 'photo:detail' photo.id %}" class="d-block mb-4 h-100">
-      <img src="{{ photo.image.url }}" class="img-fluid rounded" alt="{{ photo.title }}" />
+      <img src="{{ photo.image.url }}" class="rounded img-fluid" alt="{{ photo.title }}" />
+        <p>{{ photo.name }}</p>
     </a>
   </div>
+  {% empty %}
+    No photos found.
   {% endfor %}
     <a href="{% url 'photo:create' %}" class="btn btn-info">
       Upload photo
     </a>
 </div>
 
+
+<nav class="mt-2" aria-label="Page navigation example">
+  <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                    Предыдующая</a>
+            </li>
+        {% endif %}
+
+      {% for num_page in paginator.page_range %}
+      	<li class="page-item">
+            <a class="page-link" href="?page={{ num_page }}">{{ num_page }}</a></li>
+      {% endfor %}
+    {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                Следующая</a></li>
+    {% endif %}
+  </ul>
+</nav>
 {% endblock body %}

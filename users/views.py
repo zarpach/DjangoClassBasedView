@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
@@ -26,5 +26,8 @@ class SignUpView(CreateView):
 
 class UserLoginView(LoginView):
     template_name = 'login.html'
+
+class UserLogoutView(LogoutView):
+    pass
 
 

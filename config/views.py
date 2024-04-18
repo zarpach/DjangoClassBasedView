@@ -1,15 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.views.generic import (ListView,
                                   DeleteView,
                                   DetailView,
                                   UpdateView,
-                                  CreateView,)
+                                  CreateView, )
 from .models import Photo
 from .forms import PhotoCreationForm
 from django.urls import reverse_lazy
 
 
+
 class PhotoListView(ListView):
+    paginate_by = 2
     model = Photo
     template_name = 'list.html'
     context_object_name = 'photos'
@@ -18,8 +20,12 @@ class PhotoListView(ListView):
 class PhotoCreateView(CreateView):
     model = Photo
     template_name = 'create.html'
-    form_class = PhotoCreationForm
     success_url = reverse_lazy('photo:list')
+    fields = ['name', 'image', 'category']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 
 class PhotoDetailView(DetailView):
@@ -40,11 +46,3 @@ class PhotoDeleteView(DeleteView):
     template_name = 'delete.html'
     context_object_name = 'photo'
     success_url = reverse_lazy('photo:list')
-
-
-
-
-
-
-
-# django-admin startapp users
