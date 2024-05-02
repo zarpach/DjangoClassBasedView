@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'config.apps.ConfigConfig',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -125,6 +126,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_URL = 'user:login'
 LOGIN_REDIRECT_URL = 'photo:list'
 LOGOUT_REDIRECT_URL = 'user:login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = False
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'eraalyqasymbekov@gmail.com'
+EMAIL_HOST_PASSWORD = 'lorjzscctemaybon'
+
+AUTH_USER_MODEL = "users.PhotoUser"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

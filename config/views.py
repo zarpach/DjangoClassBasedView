@@ -17,7 +17,7 @@ class PhotoListView(ListView):
     context_object_name = 'photos'
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = super().get_queryset().order_by('created_at')
         self.filterset = PhotoSearch(
             self.request.GET,
             queryset=queryset
@@ -60,3 +60,5 @@ class PhotoDeleteView(DeleteView):
     template_name = 'delete.html'
     context_object_name = 'photo'
     success_url = reverse_lazy('photo:list')
+
+# git pull

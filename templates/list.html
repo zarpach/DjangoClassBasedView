@@ -18,12 +18,14 @@
       <form method="get">
           <div class="form-control m-2">
               <label for="{{ filter.form.id_for_name }}">Name subject:</label>
-              {{ filter.form.name }}
+
+              <input type="text" name="name">
           </div>
 
           <div class="form-control m-2">
               <label for="{{ filter.form.id_for_name }}">Category:</label>
-              {{ filter.form.category }}
+
+              <select name="category" id="id_category"></select>
           </div>
 
           <div class="col form-control m-2">
